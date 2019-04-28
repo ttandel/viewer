@@ -1,0 +1,28 @@
+html,
+body {
+    background-color: #ffffff;
+}
+
+body {
+    height: 96vh;
+    font-size: 1.2em;
+}
+
+#folder-select {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#view-video {
+    display: none;
+}
+
+#status-bar {
+    display: none;
+}
+
+
+
+

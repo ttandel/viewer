@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Viewer</title>
+    <link rel="stylesheet" type="text/css" href="css/initial.css">
+</head>
+
+<body>
+    <div id="folder-select">
+        <img src="assets/plus-512.png">
+    </div>
+    <div class="main">
+        <div id="media-list">
+        </div>
+        <div id="media-view">
+            <img id="view-image">
+            <!-- TODO: add user settings to control autoplay, loop-->
+            <video id="view-video" controls autoplay loop>
+                <source id="vid-source" src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div id="status-bar">
+        <div id="file-count">
+            <form id="goto-form" onsubmit="">
+                <input id="goto-index" type="number" min="1">
+            </form>
+            <span id="max-index"></span>
+        </div>
+        <span id="file-path"></span>
+    </div>
+</body>
+<script>
+    const utils = require('./js/utils.js');
+    const Viewer = require('./js/viewer.js');
+
+    var testPath;
+    document.querySelector('#folder-select').onclick = () => {
+        utils.folderSelect();
+    }
+
+    utils.myEmitter.on('folderSelected', (path) => {
+        utils.replaceStylesheet('css/app.css');
+        var app_viewer = new Viewer(path);
+        app_viewer.init();
+    });
+
+    require('electron').ipcRenderer.on('menu-folder-select', () => {
+        utils.folderSelect();
+    });
+
+
+</script>
+
+</html>
